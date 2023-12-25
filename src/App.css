@@ -2,16 +2,29 @@
   width: 15%;
   height: 100%;
   display: flex;
+  position: fixed;
   flex-direction: column;
   justify-content:center;
   align-items: center;
-  border: 1px solid;
+  /* border: 1px solid; */
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px lightgray;
 }
 
 .Navbar--button {
   margin: 10px;
-  width: 50%;
-  height: 3%;
+  width: 60%;
+  height: 4%;
+  background-color: lightgray;
+  color: #454545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Navbar--button:hover {
+  background-color:#454545;
+  color: lightgray;
 }
 
 .App--body {
@@ -26,4 +39,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.ToDoBody--addItem {
+  box-shadow: 2px 2px 5px lightgray;
+  /* border-radius: 5px; */
+  margin-bottom: 10px;
+  padding: 10px 0px 10px 0px;
+}
+
+.addItem--text {
+  border: none; 
+}
+
+.addItem--text:focus {
+  outline: none;
 }

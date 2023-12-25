@@ -3,8 +3,8 @@ export default function ToDoBody() {
         <div className="ToDoBody">
             <div>
                 <div className="ToDoBody--addItem">
-                    <input type="checkbox" id="addItem"></input>
-                    <label for="addItem">Add a new To Do item</label>
+                    <input type="checkbox"></input>
+                    <input type="textbox" className="addItem--text" id="addItem" placeholder="Add a new To Do item"></input>
                 </div>
                 <div className="ToDoBody--items">
                 <ToDoItem title="Buy Milk" id="1"/>
