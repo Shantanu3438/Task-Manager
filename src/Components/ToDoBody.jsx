@@ -2,10 +2,11 @@ import { useState } from "react"
 
 export default function ToDoBody() {
 
-    const [items, setItems] = useState([])
+    const [uncheckedItems, setUncheckedItems] = useState([])
+    const [checkedItems, setCheckedItems] = useState([{title:'Go for shopping', id:'3', isChecked:'true'}])
     const [newItemText, setNewItemText] = useState('')
 
-    const handleInputChange = (event) =>{
+    const handleInputText = (event) =>{
         setNewItemText(event.target.value)
     }
 
@@ -15,10 +16,14 @@ export default function ToDoBody() {
                 title: newItemText,
                 id: Date.now().toString(),
             }
-            setItems([...items, newItem])
+            setUncheckedItems([...uncheckedItems, newItem])
             setNewItemText('')
         }
-    } 
+    }
+    
+    function handleInputChange(event) {
+        console.log(event.target.id)
+    }
 
     return (
         <div className="ToDoBody">
@@ -32,12 +37,17 @@ export default function ToDoBody() {
                     placeholder="Add a new To Do item"
                     value={newItemText}
                     onKeyDown={handleKeyDown}
-                    onChange={handleInputChange}
+                    onChange={handleInputText}
                     ></input>
                 </div>
                 <div className="ToDoBody--items">
-                {items.map(item => (
-                    <ToDoItem key={item.id} title={item.title} id={item.id} />
+                {uncheckedItems.map(item => (
+                    <ToDoItem key={item.id} title={item.title} id={item.id} handleInput={handleInputChange}/>
+                    ))}
+
+                {
+                checkedItems.map(item => (
+                    <ToDoItem key={item.id} title={item.title} id={item.id} isChecked={true} handleInput={handleInputChange}/>
                 ))}
                 </div>
             </div>
@@ -48,8 +58,13 @@ export default function ToDoBody() {
 function ToDoItem(props) {
     return (
         <div>
-            <input type="checkbox" id={props.id}></input>
-            <label for={props.id}>{props.title}</label>
+            <input 
+            type="checkbox" 
+            id={props.id} 
+            checked={props.isChecked}
+            onChange={props.handleInput}
+            ></input>
+            <label style={props.isChecked ? {textDecoration:'line-through'}: {}} for={props.id}>{props.title}</label>
         </div>
     )
 }
