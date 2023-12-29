@@ -3,7 +3,7 @@ import { useState } from "react"
 export default function ToDoBody() {
 
     const [uncheckedItems, setUncheckedItems] = useState([])
-    const [checkedItems, setCheckedItems] = useState([{title:'Go for shopping', id:'3', isChecked:'true'}])
+    const [checkedItems, setCheckedItems] = useState([])
     const [newItemText, setNewItemText] = useState('')
 
     const handleInputText = (event) =>{
@@ -22,7 +22,18 @@ export default function ToDoBody() {
     }
     
     function handleInputChange(event) {
-        console.log(event.target.id)
+        const isChecked = event.target.checked
+        const itemId = event.target.id
+        if (isChecked) {
+            const itemToCheck = uncheckedItems.find((item) => item.id == itemId)
+            setCheckedItems((prevItems) => [...prevItems, itemToCheck])
+            setUncheckedItems((prevItems) => prevItems.filter((item) => item.id != itemId))
+        }
+        else {
+            const itemToUncheck = checkedItems.find((item) => item.id == itemId)
+            setCheckedItems((prevItems) => prevItems.filter((item) => item.id != itemId))
+            setUncheckedItems((prevItems) => [...prevItems, itemToUncheck])
+        }
     }
 
     return (
