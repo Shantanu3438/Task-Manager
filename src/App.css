@@ -46,15 +46,28 @@
 
 .ToDoBody--addItem {
   box-shadow: 2px 2px 5px lightgray;
-  /* border-radius: 5px; */
-  margin-bottom: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
   padding: 10px 0px 10px 0px;
 }
 
 .addItem--text {
-  border: none; 
+  border: none
 }
 
 .addItem--text:focus {
   outline: none;
+}
+
+.todoItem {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border: 2px solid black; */
+}
+
+.todoItem:hover {
+  box-shadow: 2px 2px 5px lightgray;
+  /* border-radius: 5px; */
 }

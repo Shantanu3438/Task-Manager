@@ -1,10 +1,20 @@
 import { useState } from "react"
+import {BiSolidTrashAlt} from "react-icons/bi"
 
 export default function ToDoBody() {
 
     const [uncheckedItems, setUncheckedItems] = useState([])
     const [checkedItems, setCheckedItems] = useState([])
     const [newItemText, setNewItemText] = useState('')
+    const [isHovered, setIsHovered] = useState(false)
+
+    const handleEnter = () => {
+        setIsHovered(true)
+    }
+ 
+    const handleLeave = () => {
+        setIsHovered(false)
+    }
 
     const handleInputText = (event) =>{
         setNewItemText(event.target.value)
@@ -53,13 +63,32 @@ export default function ToDoBody() {
                 </div>
                 <div className="ToDoBody--items">
                 {uncheckedItems.map(item => (
-                    <ToDoItem key={item.id} title={item.title} id={item.id} handleInput={handleInputChange}/>
-                    ))}
+                    <
+                        ToDoItem 
+                        key={item.id} 
+                        title={item.title} 
+                        id={item.id}
+                        isHovered={isHovered}
+                        handleEnter={handleEnter}
+                        handleLeave={handleLeave}
+                        handleInput={handleInputChange}
+                    />
+                    )).reverse()}
 
                 {
                 checkedItems.map(item => (
-                    <ToDoItem key={item.id} title={item.title} id={item.id} isChecked={true} handleInput={handleInputChange}/>
-                ))}
+                    <
+                        ToDoItem 
+                        key={item.id} 
+                        title={item.title} 
+                        id={item.id}
+                        isHovered={isHovered}
+                        handleEnter={handleEnter}
+                        handleLeave={handleLeave}
+                        isChecked={true} 
+                        handleInput={handleInputChange}
+                    />
+                )).reverse()}
                 </div>
             </div>
         </div>
@@ -67,15 +96,31 @@ export default function ToDoBody() {
 }
 
 function ToDoItem(props) {
+    
     return (
-        <div>
+        <div 
+        className="todoItem"
+        onMouseEnter={props.handleEnter}
+        onMouseLeave={props.handleLeave}
+        >
+            <div>
             <input 
             type="checkbox" 
             id={props.id} 
             checked={props.isChecked}
             onChange={props.handleInput}
             ></input>
-            <label style={props.isChecked ? {textDecoration:'line-through'}: {}} for={props.id}>{props.title}</label>
+            <label style={props.isChecked ? {textDecoration:'line-through', color:'gray'}: {}} for={props.id}>{props.title}</label>
+            </div>
+            {props.isHovered && <DeleteIcon />}
+        </div>
+    )
+}
+
+function DeleteIcon() {
+    return (
+        <div >
+            <BiSolidTrashAlt style={{color:'red', marginTop:'3px'}}/>
         </div>
     )
 }
